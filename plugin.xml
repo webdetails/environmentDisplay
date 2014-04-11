@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin title="EnvironmentDisplay" loader="DEFAULT">
+<overlays>
+		<overlay id="startup.EnvironmentDisplay" resourcebundle="content/EnvironmentDisplay/resources/lang/messages">
+			<menubar id="toolsmenu">
+	        	<menuitem id="EnvironmentDisplay" label="${Launcher.EnvironmentDisplay}" command="mantleXulHandler.openUrl('${Launcher.EnvironmentDisplay}','${Launcher.EnvironmentDisplay_TOOLTIP}','plugin/EnvironmentDisplay/api/default')"/>
+	      	</menubar>
+	    </overlay>
+	</overlays>
+	<lifecycle-listener class="pt.webdetails.cpk.CpkLifecycleListener"/>
+	<static-paths>
+		<static-path url="/EnvironmentDisplay/static" localFolder="static"/>
+		<static-path url="/EnvironmentDisplay/resources" localFolder="resources"/>
+	</static-paths>
+	<content-types>
+		<content-type>
+			<title>EnvironmentDisplay</title>
+			<description></description>
+			<company name="" url="" logo="@PLUGIN_COMPANY_LOGO@"></company>
+		</content-type>
+	</content-types>
+	<content-generator
+		id="EnvironmentDisplay"
+		title="EnvironmentDisplay"
+		type="EnvironmentDisplay"
+		class="pt.webdetails.cpk.CpkContentGenerator"/>
+	<!-- Menu entry -->
+	<menu-items>
+		<!--<menu-item id="EnvironmentDisplay_main" anchor="tools-submenu" label="EnvironmentDisplay" command="content/EnvironmentDisplay/" type="MENU_ITEM" how="LAST_CHILD"/>-->
+	</menu-items>
+</plugin>
