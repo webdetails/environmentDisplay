@@ -366,7 +366,7 @@
      },
      {
       "name": "html",
-      "value": "<p>\n    The following table lists the Sparkl specific system variables passed to the PDI Endpoints at execution time\n</p> ",
+      "value": "<p>\n    The following table lists the Sparkl specific system variables passed to the PDI Endpoints at execution time.\n</p> ",
       "type": "Html"
      },
      {
@@ -603,6 +603,21 @@
       "type": "JavaScript"
      },
      {
+      "name": "colWidths",
+      "value": "[\"0%\",\"30%\",\"70%\"]",
+      "type": "Array"
+     },
+     {
+      "name": "colSortable",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "expandParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
       "name": "parameters",
       "value": "[]",
       "type": "ValuesArray"
@@ -623,19 +638,19 @@
       "type": "Array"
      },
      {
-      "name": "colWidths",
-      "value": "[\"30%\",\"70%\"]",
-      "type": "Array"
+      "name": "displayLength",
+      "value": "100",
+      "type": "Integer"
      },
      {
-      "name": "colSortable",
-      "value": "[]",
-      "type": "Array"
+      "name": "lengthChange",
+      "value": "false",
+      "type": "Boolean"
      },
      {
-      "name": "expandParameters",
-      "value": "[]",
-      "type": "ValuesArray"
+      "name": "expandOnClick",
+      "value": "false",
+      "type": "Boolean"
      },
      {
       "name": "paginate",
@@ -655,21 +670,6 @@
      {
       "name": "sort",
       "value": "true",
-      "type": "Boolean"
-     },
-     {
-      "name": "displayLength",
-      "value": "100",
-      "type": "Integer"
-     },
-     {
-      "name": "lengthChange",
-      "value": "false",
-      "type": "Boolean"
-     },
-     {
-      "name": "expandOnClick",
-      "value": "false",
       "type": "Boolean"
      },
      {
@@ -744,7 +744,7 @@
      },
      {
       "name": "postExecution",
-      "value": "",
+      "value": "function() {\n    $('#tableObjTable_filter > input[type=\"text\"]').attr('placeholder','Search');\n    $('#tableObjTable_filter').contents().filter(function() {\n        return this.nodeType == 3\n    }).each(function(){\n        this.textContent = this.textContent.replace('Search:','');\n    });\n    $('.paging_full_numbers span.first, .paging_full_numbers span.previous, .paging_full_numbers span.next, .paging_full_numbers span.last').text('');\n}",
       "type": "JavaScript"
      },
      {
@@ -1108,5 +1108,5 @@
    }
   ]
  },
- "filename": "/system/EnvironmentDisplay/dashboards/admin/EnvironmentDisplay.cdfde"
+ "filename": "/home/admin/environmentDisplay/dashboards/admin/EnvironmentDisplay.cdfde"
 }
