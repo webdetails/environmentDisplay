@@ -688,12 +688,12 @@ button {
 .environmentDisplayMainHeader{
   padding-top: 30px;
 	background: #ffffff;
-	font-size: 16px;
+	font-size: 26px;
 	text-align: left;
 	color: #1974bd;
 	font-family: 'Open Sans Light';
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 52px;
 }
 
 .environmentDisplayMainHeader:after{
@@ -701,7 +701,7 @@ button {
 	width: 140px;
 	height: 3px;
 	background: #ffd000;
-  bottom: -32px;
+  bottom: -43px;
   position: absolute;
 
 }
