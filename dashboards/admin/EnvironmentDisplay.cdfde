@@ -744,7 +744,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function() {\n    $('#tableObjTable_filter > input[type=\"text\"]').attr('placeholder','Search');\n    $('#tableObjTable_filter').contents().filter(function() {\n        return this.nodeType == 3\n    }).each(function(){\n        this.textContent = this.textContent.replace('Search:','');\n    });\n    $('.paging_full_numbers span.first, .paging_full_numbers span.previous, .paging_full_numbers span.next, .paging_full_numbers span.last').text('');\n}",
+      "value": "function f() {\n    $('#tableObjTable_filter > input[type=\"text\"]').attr('placeholder','Search');\n    $('#tableObjTable_filter').contents().filter(function() {\n        return this.nodeType == 3\n    }).each(function(){\n        this.textContent = this.textContent.replace('Search:','');\n    });\n    $('.paging_full_numbers span.first, .paging_full_numbers span.previous, .paging_full_numbers span.next, .paging_full_numbers span.last').text('');\n\n}",
       "type": "JavaScript"
      },
      {
@@ -802,7 +802,7 @@
      },
      {
       "name": "expression",
-      "value": "function f(){\n    \n    Dashboards.fireChange(\"refreshParam\",\"foo\");\n}",
+      "value": "function f(){\n    \n    Dashboards.fireChange(\"refreshParam\",\"foo\");\n    \n    \n    setTimeout(function(){\n        render_variableTable.dataTable.fnSort([[0,'asc']]);     \n    },500)\n    \n}",
       "type": "JavaScript"
      },
      {
