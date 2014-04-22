@@ -366,7 +366,7 @@
      },
      {
       "name": "html",
-      "value": "<p>\n    The following table lists the Sparkl specific system variables passed to the PDI Endpoints at execution time.\n</p> ",
+      "value": "<p>\n    The following table shows several system and session environment information\n    useful for development and debugging. Even though it's not sensitive information, \n    it's not recommended to have this plugin installed in a production environment\n</p> ",
       "type": "Html"
      },
      {
@@ -1108,5 +1108,5 @@
    }
   ]
  },
- "filename": "/home/admin/environmentDisplay/dashboards/admin/EnvironmentDisplay.cdfde"
+ "filename": "/system/EnvironmentDisplay/dashboards/admin/EnvironmentDisplay.cdfde"
 }
