@@ -40,14 +40,6 @@
       </fileset>
     </copy>
 
-    <!-- create a market_entry.xml file -->
-    <copy file="${basedir}/market_entry.xml" tofile="${stage.dir}/${plugin.name}/market_entry.xml" overwrite="true">
-      <filterset>
-        <filter token="project.stage" value="${project.stage}"/>
-        <filter token="distribution.version" value="${distribution.version}"/>
-        <filter token="ivy.artifact.id" value="${ivy.artifact.id}"/>
-      </filterset>
-    </copy>
 
     <!-- create the version file -->
 	<tstamp/>			
