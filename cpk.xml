@@ -22,7 +22,7 @@
     </elementTypes> 
     <info>
         <CPK_version>4</CPK_version>
-        <description>Displays information about the Pentaho envorinment</description>
+        <description>Displays information about the Pentaho envirionment</description>
         <name>EnvironmentDisplay</name>
         <author_email>pedro.alves@webdetails.pt</author_email>
         <author_name>Pedro Alves</author_name>
