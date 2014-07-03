@@ -177,6 +177,21 @@ model.addRow( new Object[]{"Runtime Information", "Total Memory", Runtime.getRun
 
 
 /*
+ *  HttpSession Info
+ */
+
+java.lang.reflect.Field field = pentahoSession.getClass().getDeclaredField("session");
+field.setAccessible(true); // this basically overrides the private setting in the PentahoHttpSession class
+javax.servlet.http.HttpSession httpSession = (javax.servlet.http.HttpSession)field.get(pentahoSession);
+
+for(java.util.Enumeration e3 = httpSession.getServletContext().getInitParameterNames(); e3.hasMoreElements() ;){
+    x = (String)e3.nextElement();
+    tmp = httpSession.getServletContext().getInitParameter(x);
+    model.addRow( new Object[]{"Pentaho Servlet Context Init Attribute", x, tmp});
+}
+
+
+/*
  *  Get reporting info
  */
 

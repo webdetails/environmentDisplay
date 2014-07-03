@@ -97,18 +97,14 @@ time, mark, audio, video {
 /* Window Background */
 body{
     font-family: 'Open Sans Light';
-    background: none repeat scroll 0% 0% #EBEDEE;
+    background: none repeat scroll 0% 0% #fff;
 }
-
-
-
-	background: #EBEDEE;
 
 .sparklWrapper{
 	width: 1000px;
-	margin-right:auto;
-  margin-left:auto;
-  background: #ebedee;
+	margin-right: auto;
+  margin-left: auto;
+  background: #fff;
 }
 
 /* =============================================================================
@@ -201,6 +197,11 @@ tr.odd td.sorting_1 {
   cursor: pointer;
 }
 
+.sorting_asc,
+.sorting_desc {
+  color: #0098c4;
+}
+
 .sorting:hover {
   background: url('../img/sort_both.png') no-repeat center right #fefefe;
 }
@@ -243,7 +244,7 @@ tr.odd td.sorting_1 {
 .refreshButton button{
   height:34px;
   width:34px;
-  background: url('../img/refresh.png') -1px 50% no-repeat;
+  background: url('../img/refresh.png') -4px 50% no-repeat;
   -webkit-border-radius:2px;
   -moz-border-radius:2px;
   -o-border-radius:2px;
@@ -252,7 +253,7 @@ tr.odd td.sorting_1 {
   float:right;
 }
 .refreshButton button:hover{
-  background-position: -36px 50%;
+  background-position: -39px 50%;
 }
 
 
@@ -309,8 +310,8 @@ table{
   margin-top: 20px;
 }
 table tr{
-  background: #EBEDEE;
-  height: 40px;
+  background: #fff;
+  height: 28px;
 }
 
 /* Header */
@@ -319,15 +320,16 @@ thead tr {
 }
 thead th {
   background: none;
-  color: #333e48;
-  font-size: 13px;
+  color: #9c9c9c;
+  font-weight: normal;
+  font-size: 12px;
   text-align: left !important;
   font-weight: normal;
   vertical-align: bottom;
   font-family: 'Open Sans Semibold';
   padding-bottom: 12px;
   padding-top: 12px;
-  padding-left: 10px;
+  padding-left: 20px;
 }
 thead th:last-child {
   text-align: center;
@@ -335,10 +337,10 @@ thead th:last-child {
 
 /* Body */
 tbody tr:nth-child(even) {
-  background: #EBEDEE;
+  background: #fff;
 }
 tbody tr:nth-child(odd) {
-  background: #f5f5f5;
+  background: #fff;
 }
 tbody td{
   text-align: left;
@@ -347,6 +349,10 @@ tbody td{
   padding: 0px;
   padding-left: 10px;
   font-family: 'Open Sans';
+  padding-left: 20px;
+  border-bottom: 1px solid #ccdee9;
+  word-break: break-all;
+  padding: 10px 5px 10px 20px;
 }
 tbody td:last-child {
   text-align: center;
@@ -380,7 +386,7 @@ tbody td.actionButtons button:hover{
   color:#333;
 }
 tbody tr:nth-child(even) td.actionButtons button {
-  background-color: #EBEDEE;
+  background-color: #fff;
 }
 tbody tr:nth-child(odd) td.actionButtons button {
   background-color: #f5f5f5;
@@ -458,21 +464,45 @@ table tr.groupHeader.group0{
 table tr.groupHeader.group0 td{
     background: inherit;
     text-align: left;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 
 table tr.groupHeader.preSpace {
-    height: 10px;
+    height: 0px;
     background: none;
 }
 
 table tr.groupHeader.postSpace {
-    height: 10px;
+    height: 0px;
     background: none;
 }
 
+
+table tr.groupHeader.preSpace td {
+    border-bottom: none;
+    padding: 0;
+}
+
+table tr.groupHeader.postSpace td {
+    border-bottom: none;
+    padding: 0;
+}
+
+
+table tr.groupHeader td.groupName {
+  background: #f6f7f9;
+  border: 1px solid #ccdee9;
+  border-top: none;
+  height: 26px;
+  padding: 0 0 0 20px;
+}
+
+
+#tableObjTable > tbody > tr.groupHeader:nth-child(2) > td {
+  border-top: 1px solid #ccdee9;
+}
 
 
 
@@ -518,11 +548,11 @@ button {
 /* All Chosen elements */
 .chzn-container{
   /*height:100%;
-  border: 4px solid #EBEDEE;
+  border: 4px solid #fff;
   min-width:160px;
   font-size: 12px;*/
   height: 100%;
-  border-top: 5px solid #EBEDEE;
+  border-top: 5px solid #fff;
   font-size: 13px;
   margin-left: -5px;
 }
@@ -656,37 +686,23 @@ button {
 }
 
 .environmentDisplayMainHeader{
-    padding-top: 30px;
-	font-size: 25px;
+  padding-top: 30px;
+	background: #ffffff;
+	font-size: 26px;
 	text-align: left;
-	font-size: 25px;
-	color: #333e48;
+	color: #1974bd;
 	font-family: 'Open Sans Light';
+  position: relative;
+  margin-bottom: 52px;
 }
 
 .environmentDisplayMainHeader:after{
 	content: '';  
-	width: 100px;
-	height: 4px;
-	background: #0098c4;
-	margin-bottom: 20px;
-
-}
-.environmentDisplayMainHeader{
-	background: #EBEDEE;
-	font-size: 25px;
-	text-align: left;
-	font-size: 25px;
-	color: #333e48;
-	font-family: 'Open Sans Light';
-}
-
-.environmentDisplayMainHeader:after{
-	content: '';  
-	width: 100px;
-	height: 4px;
-	background: #0098c4;
-	margin-bottom: 20px;
+	width: 140px;
+	height: 3px;
+	background: #ffd000;
+  bottom: -43px;
+  position: absolute;
 
 }
 
@@ -694,4 +710,176 @@ button {
 	visibility: visible;
 }
 
+#refreshObj {
+  border-right: 1px solid #d0e1eb;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
+#tableObjTable_filter input {
+  border: 1px solid #ccdee9;
+  line-height: 22px;
+  padding: 6px 40px 6px 16px;
+  background: url(../img/search.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  width: 350px;
+}
+
+.dataTables_info {
+  width: 20%;
+  float: left;
+  padding-top: 45px;
+}
+
+.paging_full_numbers {
+  width: 60%;
+  text-align: center;
+  margin-top: 43px;
+}
+.dataTables_paginate {
+  float: left;
+}
+
+.paging_full_numbers span.paginate_button:hover {
+  background: none;
+  color: #1974bd;
+}
+.paging_full_numbers span.paginate_button {
+  background: none;
+  color: #1974bd;
+}
+.paging_full_numbers span.paginate_button, .paging_full_numbers span.paginate_active {
+  border: none;
+  margin: 0px 10px;
+}
+
+.paging_full_numbers span.paginate_active {
+  background: none;
+  color: #333e48;
+  font-weight: bold;
+}
+
+.paging_full_numbers span.first {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/first-page.png);
+   background-position: 0px 0px;
+   background-repeat: no-repeat;
+   display: inline-block;
+
+}
+
+.paging_full_numbers span.first:hover {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/first-page.png);
+   background-repeat: no-repeat;
+   display: inline-block;
+   background-position: -15px 0px;
+}
+
+.paging_full_numbers span.previous {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/prev-page.png);
+   background-position: 0px 0px;
+   background-repeat: no-repeat;
+   display: inline-block;
+}
+
+.paging_full_numbers span.previous:hover {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/prev-page.png);
+   background-repeat: no-repeat;
+   display: inline-block;
+   background-position: -15px 0px;
+}
+
+.paging_full_numbers span.next {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/next-page.png);
+   background-position: 0px 0px;
+   background-repeat: no-repeat;
+   display: inline-block;
+}
+
+.paging_full_numbers span.next:hover {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/next-page.png);
+   background-repeat: no-repeat;
+   display: inline-block;
+   background-position: -15px 0px;
+}
+
+.paging_full_numbers span.last {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/last-page.png);
+   background-position: 0px 0px;
+   background-repeat: no-repeat;
+   display: inline-block;
+}
+
+.paging_full_numbers span.last:hover {
+   width: 15px;
+   padding: 0;
+   margin: -2px 10px;
+   height: 15px;
+   background: url(../img/last-page.png);
+   background-repeat: no-repeat;
+   display: inline-block;
+   background-position: -15px 0px;
+}
+
+.column1.sorting,
+.column1.sorting_asc,
+.column1.sorting_desc {
+  background-position: 100px center;
+  background-color: #fff;
+}
+
+.column2.sorting,
+.column2.sorting_asc,
+.column2.sorting_desc {
+  background-position: 85px center;
+  background-color: #fff;
+}
+
+.column1.sorting_asc,
+.column1.sorting_asc:hover {
+    background: url('../img/sort_asc.png') no-repeat scroll 100px center #fff;
+}
+
+.column1.sorting_desc,
+.column1.sorting_desc:hover {
+    background: url('../img/sort_desc.png') no-repeat scroll 100px center #fff;
+}
+
+.column2.sorting_asc,
+.column2.sorting_asc:hover {
+    background: url('../img/sort_asc.png') no-repeat scroll 85px center #fff;
+}
+
+.column2.sorting_desc,
+.column2.sorting_desc:hover {
+    background: url('../img/sort_desc.png') no-repeat scroll 85px center #fff;
+}
