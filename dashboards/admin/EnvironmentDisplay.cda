@@ -205,6 +205,72 @@ add(model, "Reporting Elements", collectData(ElementTypeRegistry.getInstance().g
 add(model, "Reporting Expressions", collectData(ExpressionRegistry.getInstance().getAllExpressionMetaDatas()));
 
 
+/*
+ *  Get installed plugins and whenever possible, its version
+ */
+
+
+String getVersionXmlAsString( java.io.BufferedInputStream bis ){
+
+  String xmlString = "";
+
+  if( bis != null ){
+
+    byte[] contents = new byte[1024];
+
+    int bytesRead=0;
+
+    while( ( bytesRead = bis.read( contents ) ) != -1 ){ 
+      xmlString = new String( contents, 0, bytesRead );               
+    }
+  }
+
+  //parse xmlString to get the version
+  if( xmlString != null ){
+
+    final String VERSION_REGEX = "&lt;version(.*?)&gt;(.*?)&lt;/version&gt;";
+
+    java.util.regex.Matcher matcher = java.util.regex.Pattern.compile( VERSION_REGEX , 
+      java.util.regex.Pattern.DOTALL | java.util.regex.Pattern.CASE_INSENSITIVE ).matcher( xmlString );
+
+    if ( matcher.find() ) {
+       String version = matcher.group( 2 );
+       if( version != null &amp;&amp; version.contains("TRUNK") ){
+          return version + " (" + matcher.group( 1 ) + " )";
+       }        
+       return version;
+    }
+  }
+  return "N/A";
+}
+
+IPluginManager pluginManager = PentahoSystem.get( IPluginManager.class );
+
+if( pluginManager.getRegisteredPlugins() != null ){ 
+
+  for( String pluginId : pluginManager.getRegisteredPlugins() ){
+
+    try{
+
+      // the plugin id is done, now let's go a fit further and attempt to fetch version.xml's data
+
+      ClassLoader pluginCL = pluginManager.getClassLoader( pluginId );
+
+      if( pluginCL != null &amp;&amp; pluginCL.findResource( "version.xml" ) != null ){
+        
+        model.addRow( new Object[]{ "Installed Plugins", pluginId, 
+          getVersionXmlAsString( pluginManager.getClassLoader( pluginId ).findResource( "version.xml" ).getContent() ) } );
+      } else {
+
+        model.addRow( new Object[]{ "Installed Plugins", pluginId, "N/A" } );
+      }
+
+    } catch( Exception e ){
+      model.addRow( new Object[]{ "Installed Plugins", pluginId, "N/A" } );   
+    }
+  }
+}
+
 return model;</Query>
    </DataAccess>
 </CDADescriptor>
