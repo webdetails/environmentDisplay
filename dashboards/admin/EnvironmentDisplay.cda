@@ -2,16 +2,15 @@
 <CDADescriptor>
    <DataSources>
       <Connection id="systemInfo" type="scripting.scripting">
-         <Initscript></Initscript>
+         <Initscript/>
          <Language>beanshell</Language>
       </Connection>
    </DataSources>
-   <DataAccess access="public" cache="false" cacheDuration="3600" connection="systemInfo"
-               id="systemInfo"
-               type="scriptable">
+   <DataAccess access="public" connection="systemInfo" id="systemInfo" type="scriptable">
+      <Cache duration="3600" enabled="false"/>
       <Columns/>
       <Parameters/>
-      <Query>import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+      <Query><![CDATA[import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
 import org.pentaho.platform.engine.core.system.*;
 import org.pentaho.platform.api.engine.*;
 import org.pentaho.platform.web.http.session.PentahoHttpSession;
@@ -28,6 +27,7 @@ import org.pentaho.reporting.engine.classic.core.metadata.MetaData;
 import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
 import org.pentaho.reporting.libraries.base.boot.Module;
 import org.pentaho.reporting.libraries.base.boot.PackageManager;
+import org.springframework.security.GrantedAuthority;
 
 
 String[] columnNames = new String[3];
@@ -58,7 +58,7 @@ TypedTableModel model = new TypedTableModel( columnNames, columnTypes);
     PackageManager packageManager = ClassicEngineBoot.getInstance().getPackageManager();
     Module[] modules = packageManager.getAllModules();
     TreeMap s = new TreeMap();
-    for (int i = 0; i &lt; modules.length; i++)
+    for (int i = 0; i < modules.length; i++)
     {
       Module module = modules[i];
       String av = packageManager.isModuleAvailable(module) ? "Available" : "Disabled";
@@ -70,7 +70,7 @@ TypedTableModel model = new TypedTableModel( columnNames, columnTypes);
   Map collectData(MetaData[] data)
   {
     TreeMap s = new TreeMap();
-    for (int i = 0; i &lt; data.length; i++)
+    for (int i = 0; i < data.length; i++)
     {
       MetaData metaData = data[i];
       try{
@@ -86,7 +86,7 @@ TypedTableModel model = new TypedTableModel( columnNames, columnTypes);
   {
     String[] keys = (String[]) map.keySet().toArray(new String[map.size()]);
     Arrays.sort(keys);
-    for (int i = 0; i &lt; keys.length; i++)
+    for (int i = 0; i < keys.length; i++)
     {
       String key = keys[i];
       model.addRow(new Object[]{type, key, map.get(key)});
@@ -156,12 +156,19 @@ for(java.util.Iterator e2 = pentahoSession.getAttributeNames();e2.hasNext() ;){
     
     if(tmp instanceof String){
         model.addRow( new Object[]{"Pentaho Session Variable", x, getAttributeValue(tmp)});
-    }
-    else if(tmp instanceof PentahoHttpSession){
-    
-    }
-    else{
-        //System.out.println("Name: " + x + "; Class: " + tmp.getClass().getName() );
+    } else if (tmp instanceof PentahoHttpSession) {
+
+    } else if (tmp instanceof Object[]) {
+        // array
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i=0; i < tmp.length; i++) {
+            stringBuilder.append(tmp[i].toString());
+            if (i < tmp.length-1) {
+                stringBuilder.append(", ");
+            }
+        }
+        model.addRow( new Object[]{"Pentaho Session Variable", x, stringBuilder.toString()});
+    } else {
         model.addRow( new Object[]{"Pentaho Session Variable", x, getAttributeValue(tmp)});
     }
 }
@@ -204,7 +211,70 @@ add(model, "Reporting Modules", collectModules());
 add(model, "Reporting Elements", collectData(ElementTypeRegistry.getInstance().getAllElementTypes()));
 add(model, "Reporting Expressions", collectData(ExpressionRegistry.getInstance().getAllExpressionMetaDatas()));
 
+/*
+ *  Get installed plugins and whenever possible, its version
+ */
 
-return model;</Query>
+String getVersionXmlAsString( java.io.BufferedInputStream bis ){
+
+  String xmlString = "";
+
+  if( bis != null ){
+
+    byte[] contents = new byte[1024];
+
+    int bytesRead=0;
+
+    while( ( bytesRead = bis.read( contents ) ) != -1 ){ 
+      xmlString = new String( contents, 0, bytesRead );               
+    }
+  }
+
+  //parse xmlString to get the version
+  if( xmlString != null ){
+
+    final String VERSION_REGEX = "<version(.*?)>(.*?)</version>";
+
+    java.util.regex.Matcher matcher = java.util.regex.Pattern.compile( VERSION_REGEX , 
+      java.util.regex.Pattern.DOTALL | java.util.regex.Pattern.CASE_INSENSITIVE ).matcher( xmlString );
+
+    if ( matcher.find() ) {
+       String version = matcher.group( 2 );
+       if( version != null && version.contains("TRUNK") ){
+          return version + " (" + matcher.group( 1 ) + " )";
+       }        
+       return version;
+    }
+  }
+  return "N/A";
+}
+
+IPluginManager pluginManager = PentahoSystem.get( IPluginManager.class );
+
+if( pluginManager.getRegisteredPlugins() != null ){ 
+
+  for( String pluginId : pluginManager.getRegisteredPlugins() ){
+
+    try{
+
+      // the plugin id is done, now let's go a fit further and attempt to fetch version.xml's data
+
+      ClassLoader pluginCL = pluginManager.getClassLoader( pluginId );
+
+      if( pluginCL != null && pluginCL.findResource( "version.xml" ) != null ){
+        
+        model.addRow( new Object[]{ "Installed Plugins", pluginId, 
+          getVersionXmlAsString( pluginManager.getClassLoader( pluginId ).findResource( "version.xml" ).getContent() ) } );
+      } else {
+
+        model.addRow( new Object[]{ "Installed Plugins", pluginId, "N/A" } );
+      }
+
+    } catch( Exception e ){
+      model.addRow( new Object[]{ "Installed Plugins", pluginId, "N/A" } );   
+    }
+  }
+}
+return model;]]></Query>
    </DataAccess>
 </CDADescriptor>
